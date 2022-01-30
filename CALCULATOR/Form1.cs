@@ -48,7 +48,7 @@ namespace CALCULATOR
             }
             else
             {
-                DataStorage.color = SystemColors.Control;
+                DataStorage.color = ColorTranslator.FromHtml("#E1E1E1");
             }
         }
 
