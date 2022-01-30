@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace CALCULATOR
 {
@@ -11,6 +12,7 @@ namespace CALCULATOR
         public static double num = 0;
         public static int op = 0;//  1 = +, 2 = -, 3 = *, 4 = /
         public static double memory = 0;
+        public static Color color;
     }
 
     public partial class Form1 : Form
@@ -18,6 +20,7 @@ namespace CALCULATOR
         public Form1()
         {
             InitializeComponent();
+            colorScheme();
         }
 
         private void displayResult()
@@ -32,9 +35,25 @@ namespace CALCULATOR
             Display.Text = DataStorage.result; 
         }
 
+        public void colorScheme()
+        {
+            var reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+
+            var currentBuildStr = (string)reg.GetValue("CurrentBuild");
+            var currentBuild = int.Parse(currentBuildStr);
+
+            if (currentBuild >= 22000) // Windows 11
+            {
+                DataStorage.color = ColorTranslator.FromHtml("#FAFAFA");
+            }
+            else
+            {
+                DataStorage.color = SystemColors.ControlText;
+            }
+        }
+
         private void K0_Click(object sender, EventArgs e)
         {
-            
             if (DataStorage.result == "0")
                 DataStorage.result += "";
             else if (DataStorage.result == "")
@@ -133,15 +152,15 @@ namespace CALCULATOR
                 DataStorage.op = 0;
                 DataStorage.result = "";
                 Pls.ForeColor = SystemColors.ControlText;
-                Pls.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Pls.BackColor = DataStorage.color;
                 Min.ForeColor = SystemColors.ControlText;
-                Min.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Min.BackColor = DataStorage.color;
                 Mul.ForeColor = SystemColors.ControlText;
-                Mul.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Mul.BackColor = DataStorage.color;
                 Div.ForeColor = SystemColors.ControlText;
-                Div.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Div.BackColor = DataStorage.color;
                 Eql.ForeColor = SystemColors.ControlText;
-                Eql.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Eql.BackColor = DataStorage.color;
             }
         }
 
@@ -156,15 +175,15 @@ namespace CALCULATOR
                 DataStorage.op = 0;
                 DataStorage.result = "";
                 Pls.ForeColor = SystemColors.ControlText;
-                Pls.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Pls.BackColor = DataStorage.color;
                 Min.ForeColor = SystemColors.ControlText;
-                Min.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Min.BackColor = DataStorage.color;
                 Mul.ForeColor = SystemColors.ControlText;
-                Mul.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Mul.BackColor = DataStorage.color;
                 Div.ForeColor = SystemColors.ControlText;
-                Div.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Div.BackColor = DataStorage.color;
                 Eql.ForeColor = SystemColors.ControlText;
-                Eql.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Eql.BackColor = DataStorage.color;
             }
         }
         
@@ -173,13 +192,13 @@ namespace CALCULATOR
             Pls.ForeColor = Color.White;
             Pls.BackColor = Color.Red;
             Min.ForeColor = SystemColors.ControlText;
-            Min.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Min.BackColor = DataStorage.color;
             Mul.ForeColor = SystemColors.ControlText;
-            Mul.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Mul.BackColor = DataStorage.color;
             Div.ForeColor = SystemColors.ControlText;
-            Div.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Div.BackColor = DataStorage.color;
             Eql.ForeColor = SystemColors.ControlText;
-            Eql.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Eql.BackColor = DataStorage.color;
 
             if (DataStorage.result == "" && Display.Text != "")
                 DataStorage.num += Convert.ToDouble(Display.Text);
@@ -197,13 +216,13 @@ namespace CALCULATOR
             Min.ForeColor = Color.White;
             Min.BackColor = Color.Red;
             Pls.ForeColor = SystemColors.ControlText;
-            Pls.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Pls.BackColor = DataStorage.color;
             Mul.ForeColor = SystemColors.ControlText;
-            Mul.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Mul.BackColor = DataStorage.color;
             Div.ForeColor = SystemColors.ControlText;
-            Div.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Div.BackColor = DataStorage.color;
             Eql.ForeColor = SystemColors.ControlText;
-            Eql.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Eql.BackColor = DataStorage.color;
             
             if (DataStorage.result == "" && Display.Text != "")
                 DataStorage.num -= Convert.ToDouble(Display.Text);
@@ -221,13 +240,13 @@ namespace CALCULATOR
             Mul.ForeColor = Color.White;
             Mul.BackColor = Color.Red;
             Pls.ForeColor = SystemColors.ControlText;
-            Pls.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Pls.BackColor = DataStorage.color;
             Min.ForeColor = SystemColors.ControlText;
-            Min.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Min.BackColor = DataStorage.color;
             Div.ForeColor = SystemColors.ControlText;
-            Div.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Div.BackColor = DataStorage.color;
             Eql.ForeColor = SystemColors.ControlText;
-            Eql.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Eql.BackColor = DataStorage.color;
             
             if (DataStorage.result == "" && Display.Text != "")
                 DataStorage.num *= Convert.ToDouble(Display.Text);
@@ -245,13 +264,13 @@ namespace CALCULATOR
             Div.ForeColor = Color.White;
             Div.BackColor = Color.Red;
             Pls.ForeColor = SystemColors.ControlText;
-            Pls.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Pls.BackColor = DataStorage.color;
             Min.ForeColor = SystemColors.ControlText;
-            Min.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Min.BackColor = DataStorage.color;
             Mul.ForeColor = SystemColors.ControlText;
-            Mul.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Mul.BackColor = DataStorage.color;
             Eql.ForeColor = SystemColors.ControlText;
-            Eql.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            Eql.BackColor = DataStorage.color;
 
             if (DataStorage.op == 4 && Display.Text == "0")
             {
@@ -281,13 +300,13 @@ namespace CALCULATOR
             else
             {
                 Pls.ForeColor = SystemColors.ControlText;
-                Pls.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Pls.BackColor = DataStorage.color;
                 Min.ForeColor = SystemColors.ControlText;
-                Min.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Min.BackColor = DataStorage.color;
                 Mul.ForeColor = SystemColors.ControlText;
-                Mul.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Mul.BackColor = DataStorage.color;
                 Div.ForeColor = SystemColors.ControlText;
-                Div.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                Div.BackColor = DataStorage.color;
                 Eql.ForeColor = Color.White;
                 Eql.BackColor = Color.Green;
                 
@@ -310,7 +329,7 @@ namespace CALCULATOR
         {
             DataStorage.memory = 0;
             MR.ForeColor = SystemColors.ControlText;
-            MR.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+            MR.BackColor = DataStorage.color;
         }
 
         private void MR_Click(object sender, EventArgs e)
@@ -330,7 +349,7 @@ namespace CALCULATOR
             else
             {
                 MR.ForeColor = SystemColors.ControlText;
-                MR.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                MR.BackColor = DataStorage.color;
             }
         }
 
@@ -345,7 +364,7 @@ namespace CALCULATOR
             else
             {
                 MR.ForeColor = SystemColors.ControlText;
-                MR.BackColor = ColorTranslator.FromHtml("#FAFAFA");
+                MR.BackColor = DataStorage.color;
             }
         }
     }
