@@ -353,7 +353,7 @@
             this.Controls.Add(this.K8);
             this.Controls.Add(this.K7);
             this.Name = "Form1";
-            this.Text = "計算機 (ver: 22.01.30.2)";
+            this.Text = "計算機 (ver: 22.01.30.3)";
             this.ResumeLayout(false);
         }
 
